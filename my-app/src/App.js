@@ -9,10 +9,10 @@ function App() {
     <div className="App">
       <h1>Task 1</h1>
       <h1>Hello, World!</h1>
-      <MyCreateElement name="MyCreateElement"></MyCreateElement>
-      <MyComponent name="MyComponent"></MyComponent>
-      <MyPureComponent name="MyPureComponent"></MyPureComponent>
-      <MyFunctionalComponent name="MyFunctionalComponent"></MyFunctionalComponent>
+      <MyCreateElement>MyCreateElement</MyCreateElement>
+      <MyComponent>MyComponent</MyComponent>
+      <MyPureComponent name="MyPureComponent"/>
+      <MyFunctionalComponent name="MyFunctionalComponent"/>
     </div>
   );
 }
