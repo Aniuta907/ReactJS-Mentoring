@@ -5,10 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 
-const isDevelopment = process.env.NODE_ENV === 'development';
-const isProduction = !isDevelopment;
-
-const optimization = () => {
+const optimization = (isProduction) => {
     const config = {
         splitChunks: {
             chunks: 'all'
@@ -25,8 +22,11 @@ const optimization = () => {
     return config;
 }
 
-module.exports = {
-    mode: 'development',
+module.exports = (env, argv) => {
+    const isDevelopment = argv.mode === "development"
+    const isProduction = !isDevelopment;
+    return {
+    mode: isDevelopment ? 'development' : 'production',
     entry: {
         main: ['@babel/polyfill', './src/index.js']
     },
@@ -40,12 +40,12 @@ module.exports = {
             '@': path.resolve(__dirname, 'src')
         }
     },
-    optimization: optimization(),
+    optimization: optimization(isProduction),
     devServer: {
         port: 3000,
         hot: isDevelopment
     },
-    devtool: isDevelopment ? 'source-map' : '',
+    devtool: isDevelopment ? 'eval-source-map' : 'source-map',
     plugins: [
         new HTMLWebPackPlugin({
             template: './public/index.html'
@@ -122,4 +122,5 @@ module.exports = {
             },
         ]
     }
+}
 }
