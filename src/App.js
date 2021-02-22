@@ -1,4 +1,6 @@
-import './App.css';
+import React from 'react';
+
+import './styles/App.css';
 import { MyCreateElement } from "./components/MyCreateElement";
 import { MyComponent } from "./components/MyComponent";
 import { MyPureComponent } from "./components/MyPureComponent"
