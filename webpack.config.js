@@ -26,7 +26,7 @@ module.exports = (env, argv) => {
     const isDevelopment = argv.mode === "development"
     const isProduction = !isDevelopment;
     return {
-    mode: isDevelopment ? 'development' : 'production',
+    mode: argv.mode,
     entry: {
         main: ['@babel/polyfill', './src/index.js']
     },
@@ -89,7 +89,7 @@ module.exports = (env, argv) => {
                 use: ['csv-loader']
             },
             {
-                test: /\.(js|jsx)$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: {
                   loader: 'babel-loader',
@@ -105,7 +105,7 @@ module.exports = (env, argv) => {
                 }
             },
             {
-                test: /\.(ts|tsx)$/,
+                test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
                   loader: 'babel-loader',
