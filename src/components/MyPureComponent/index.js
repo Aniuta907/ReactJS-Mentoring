@@ -1,1 +1,0 @@
-export { MyPureComponent } from './MyPureComponent';
