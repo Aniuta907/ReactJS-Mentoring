@@ -7,7 +7,7 @@ export const DottedIcon: React.FC = () => {
   return (
     <div className="dotted-icon">
       <div className="dotted-icon-image">
-        <DottedIconImage width={34} height={34} viewBox="0 0 44 44" fill="none" />
+        <DottedIconImage />
       </div>
       <div className="dotted-icon-modal dotted-icon-modal-hidden">
         <div className="dotted-icon-close-icon">X</div>
