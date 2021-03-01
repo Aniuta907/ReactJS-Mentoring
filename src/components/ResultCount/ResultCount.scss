@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.span {
+  &-movies {
+    font-weight: 100;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+  }
+
+  &-count {
+    font-weight: 900;
+    margin-right: 6px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+  }
+}
+
+.count-div {
+  color: rgb(180, 180, 180);
+  letter-spacing: 1px;
+  text-align: left;
+  font-size: 22px;
+  height: 50px;
+  margin-top: 10px;
+  margin-left: 100px;
+  position: relative;
+  letter-spacing: 1px;
+}

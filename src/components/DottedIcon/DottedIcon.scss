@@ -1,0 +1,54 @@
+.dotted-icon {
+  position: relative;
+
+  &-image {
+    cursor: pointer;
+    right: 0;
+    position: absolute;
+    z-index: 1;
+  }
+
+  &-modal {
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #232323;
+    outline: transparent;
+    color: #b4b4b4;
+    font-size: medium;
+    width: 160px;
+    padding: 5px 0;
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+
+    &-hidden {
+      display: none;
+    }
+  }
+
+  &-close-icon {
+    display: inline-block;
+    align-self: flex-end;
+    right: 0;
+    padding: 0 5px 5px 0;
+    cursor: pointer;
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
+  &-option {
+    padding: 10px 20px;
+    cursor: pointer;
+    &:hover {
+      background-color: #f65261;
+      color: #ffffff;
+    }
+  }
+}

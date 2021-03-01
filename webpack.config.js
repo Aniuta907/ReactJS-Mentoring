@@ -28,14 +28,14 @@ module.exports = (env, argv) => {
     return {
     mode: argv.mode,
     entry: {
-        main: ['@babel/polyfill', './src/index.js']
+        main: ['@babel/polyfill', './src/index.tsx']
     },
     output: {
         "filename": "[name].js",
         path: path.resolve(__dirname, 'dist')
     },
     resolve: {
-        extensions: ['.js', '.json'],
+        extensions: ['.js', '.json', '.ts', '.tsx'],
         alias: {
             '@': path.resolve(__dirname, 'src')
         }
@@ -70,7 +70,7 @@ module.exports = (env, argv) => {
             },
             {
                 test: /\.s[ac]ss$/,
-                use: ['css-loader', 'sass-loader']
+                use: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.(png|jpg|svg|gif)$/,
@@ -112,6 +112,7 @@ module.exports = (env, argv) => {
                   options: {
                     presets: [
                         '@babel/preset-env',
+                        '@babel/preset-react',
                         '@babel/preset-typescript'
                     ],
                     plugins: [
