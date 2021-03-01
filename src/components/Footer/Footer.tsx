@@ -1,12 +1,12 @@
 import React from "react";
 
-import './Footer.scss';
+import "./Footer.scss";
 import { Logo } from "../Logo";
 
-export const Footer = () => {
+export const Footer: React.FC = () => {
   return (
-    <div className='footer'>
-      <Logo/>
+    <div className="footer">
+      <Logo />
     </div>
-  )
-}
+  );
+};

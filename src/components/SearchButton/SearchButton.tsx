@@ -1,9 +1,7 @@
 import React from "react";
 
-import './SearchButton.scss';
+import "./SearchButton.scss";
 
-export const SearchButton = () => {
-  return (
-    <button className="search-button">search</button>
-  )
-}
+export const SearchButton: React.FC = () => (
+  <button className="search-button">search</button>
+);

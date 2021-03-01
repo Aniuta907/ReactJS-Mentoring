@@ -1,9 +1,7 @@
 import React from "react";
 
-import './AddMovieButton.scss';
+import "./AddMovieButton.scss";
 
-export const AddMovieButton = () => {
-  return (
-    <button className="add-movie-button">+ add movie</button>
-  )
-}
+export const AddMovieButton: React.FC = () => (
+  <button className="add-movie-button">+ add movie</button>
+);
