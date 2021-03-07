@@ -13,8 +13,8 @@ export const Header: React.FC = () => {
         <Logo />
       </div>
       <div className="header-span">find your movie</div>
-      <AddMovieButton />
       <SearchBox />
+      <AddMovieButton />
     </div>
   );
 };

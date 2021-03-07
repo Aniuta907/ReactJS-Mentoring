@@ -1,0 +1,147 @@
+.modal-shim {
+  position: fixed;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  z-index: 9999;
+}
+
+.modal {
+  margin-top: 100px;
+  position: relative;
+  display: inline-block;
+  width: 700px;
+  z-index: 100;
+  background: #232323;
+  box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+
+  &-span {
+    color: #ffffffc9;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: "Open Sans", sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    padding-bottom: 20px;
+  }
+
+  &-guts {
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  &-label {
+    color: #f65161;
+    font-size: large;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    margin: 15px 0;
+    letter-spacing: 1px;
+  }
+
+  &-edit-id {
+    color: #ffffffc9;
+    font-size: large;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+
+  &-input {
+    background: #2e2e2e;
+    color: #ffffffc9;
+    font-size: x-large;
+    font-family: "Open Sans", sans-serif;
+    height: 50px;
+    border: none;
+    padding: 0 15px;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+  }
+
+  &-select {
+    background: #2e2e2e;
+    font-size: x-large;
+    font-family: "Open Sans", sans-serif;
+    height: 50px;
+    border: none;
+    padding: 0 15px;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    color: #ffffff93;
+  }
+
+  &-option {
+    padding: 0 15px;
+    outline: transparent;
+    border: none;
+    color: #ffffffc9;
+  }
+
+  &-close-icon {
+    position: absolute;
+    color: #b4b4b4;
+    display: inline-block;
+    align-self: flex-end;
+    right: 0;
+    padding: 20px 20px 0 0;
+    font-size: xx-large;
+    font-family: "Open Sans", sans-serif;
+    cursor: pointer;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
+  &-footer {
+    padding-top: 50px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &-left-button {
+    background: #232323;
+    color: #f65161;
+    font-size: large;
+    z-index: 1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 160px;
+    height: 53px;
+    margin-left: 10px;
+    border-color: #f65161;
+    border-radius: 3px;
+  }
+
+  &-right-button {
+    background: #f65161;
+    color: white;
+    font-size: large;
+    z-index: 1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 160px;
+    height: 53px;
+    margin-left: 10px;
+    border-color: transparent;
+    border-radius: 3px;
+    margin-left: 15px;
+  }
+
+  &-text {
+    margin-top: 15px;
+    font-family: "Open Sans", sans-serif;
+  }
+}
+
+input[type="date"] {
+  color: #555555;
+}
