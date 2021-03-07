@@ -17,22 +17,42 @@ export class DottedIcon extends React.Component<React.Attributes, DottedIconStat
 
   private modalRef = React.createRef<HTMLDivElement>();
 
-  toggleDropdown(): void {
-    this.setState((state) => ({
-      IsDropdownVisible: !state.IsDropdownVisible,
-    }));
+  openDropdown(): void {
+    this.setState({
+      IsDropdownVisible: true,
+    });
   }
 
-  toggleEditModal(): void {
-    this.setState((state) => ({
-      IsEditModalVisible: !state.IsEditModalVisible,
-    }));
+  closeDropdown(): void {
+    this.setState({
+      IsDropdownVisible: false,
+    });
   }
 
-  toggleDeleteModal(): void {
-    this.setState((state) => ({
-      IsDeleteModalVisible: !state.IsDeleteModalVisible,
-    }));
+  openEditModal(): void {
+    this.setState({
+      IsEditModalVisible: true,
+    });
+    this.closeDropdown();
+  }
+
+  closeEditModal(): void {
+    this.setState({
+      IsEditModalVisible: false,
+    });
+  }
+
+  openDeleteModal(): void {
+    this.setState({
+      IsDeleteModalVisible: true,
+    });
+    this.closeDropdown();
+  }
+
+  closeDeleteModal(): void {
+    this.setState({
+      IsDeleteModalVisible: false,
+    });
   }
 
   componentDidMount(): void {
@@ -49,57 +69,57 @@ export class DottedIcon extends React.Component<React.Attributes, DottedIconStat
       this.modalRef.current &&
       !this.modalRef.current.contains(event.target as Node)
     ) {
-      this.toggleDropdown();
+      this.closeDropdown();
     }
   };
 
   render(): React.ReactNode {
     return (
       <div className="dotted-icon">
-        <div className="dotted-icon-image" onClick={this.toggleDropdown.bind(this)}>
+        <div className="dotted-icon-image" onClick={this.openDropdown.bind(this)}>
           <DottedIconImage />
         </div>
         {this.state.IsDropdownVisible ? (
           <div className="dotted-icon-modal" ref={this.modalRef}>
             <div
               className="dotted-icon-close-icon"
-              onClick={this.toggleDropdown.bind(this)}
+              onClick={this.closeDropdown.bind(this)}
             >
               X
             </div>
             <div
               className="dotted-icon-option"
-              onClick={this.toggleEditModal.bind(this)}
+              onClick={this.openEditModal.bind(this)}
             >
               Edit
             </div>
-            {this.state.IsEditModalVisible ? (
-              <ModalWindow
-                IsModalVisible={this.state.IsEditModalVisible}
-                modalType="edit"
-                modalTitle="EDIT MOVIE"
-                leftButton="RESET"
-                rightButton="SAVE"
-                toggleModal={this.toggleEditModal.bind(this)}
-              />
-            ) : null}
             <div
               className="dotted-icon-option"
-              onClick={this.toggleDeleteModal.bind(this)}
+              onClick={this.openDeleteModal.bind(this)}
             >
               Delete
             </div>
-            {this.state.IsDeleteModalVisible ? (
-              <ModalWindow
-                IsModalVisible={this.state.IsDeleteModalVisible}
-                modalType="delete"
-                modalTitle="DELETE MOVIE"
-                modalText="Are you sure you want to delete this movie?"
-                rightButton="CONFIRM"
-                toggleModal={this.toggleDeleteModal.bind(this)}
-              />
-            ) : null}
           </div>
+        ) : null}
+        {this.state.IsEditModalVisible ? (
+          <ModalWindow
+            IsModalVisible={this.state.IsEditModalVisible}
+            modalType="edit"
+            modalTitle="EDIT MOVIE"
+            leftButton="RESET"
+            rightButton="SAVE"
+            closeModal={this.closeEditModal.bind(this)}
+          />
+        ) : null}
+        {this.state.IsDeleteModalVisible ? (
+          <ModalWindow
+            IsModalVisible={this.state.IsDeleteModalVisible}
+            modalType="delete"
+            modalTitle="DELETE MOVIE"
+            modalText="Are you sure you want to delete this movie?"
+            rightButton="CONFIRM"
+            closeModal={this.closeDeleteModal.bind(this)}
+          />
         ) : null}
       </div>
     );

@@ -13,16 +13,22 @@ export class AddMovieButton extends React.Component<
     IsModalVisible: false,
   };
 
-  toggleModal(): void {
-    this.setState((state) => ({
-      IsModalVisible: !state.IsModalVisible,
-    }));
+  openModal(): void {
+    this.setState({
+      IsModalVisible: true,
+    });
+  }
+
+  closeModal(): void {
+    this.setState({
+      IsModalVisible: false,
+    });
   }
 
   render(): React.ReactNode {
     return (
       <>
-        <button className="add-movie-button" onClick={this.toggleModal.bind(this)}>
+        <button className="add-movie-button" onClick={this.openModal.bind(this)}>
           + add movie
         </button>
         {this.state.IsModalVisible ? (
@@ -32,7 +38,7 @@ export class AddMovieButton extends React.Component<
             modalTitle="ADD MOVIE"
             leftButton="RESET"
             rightButton="SUBMIT"
-            toggleModal={this.toggleModal.bind(this)}
+            closeModal={this.closeModal.bind(this)}
           />
         ) : null}
       </>

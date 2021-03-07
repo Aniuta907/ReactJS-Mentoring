@@ -9,7 +9,7 @@ interface ModalWindowProps {
   leftButton?: string;
   rightButton?: string;
   IsModalVisible: boolean;
-  toggleModal: () => void;
+  closeModal: () => void;
 }
 export class ModalWindow extends React.Component<ModalWindowProps> {
   private modalRef = React.createRef<HTMLDivElement>();
@@ -28,7 +28,7 @@ export class ModalWindow extends React.Component<ModalWindowProps> {
       this.modalRef.current &&
       !this.modalRef.current.contains(event.target as Node)
     ) {
-      this.props.toggleModal();
+      this.props.closeModal();
     }
   };
 
@@ -40,7 +40,7 @@ export class ModalWindow extends React.Component<ModalWindowProps> {
             <div className="modal" ref={this.modalRef}>
               <div
                 className="modal-close-icon"
-                onClick={this.props.toggleModal.bind(this)}
+                onClick={this.props.closeModal.bind(this)}
               >
                 X
               </div>
