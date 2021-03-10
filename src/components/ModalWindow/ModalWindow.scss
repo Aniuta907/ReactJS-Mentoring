@@ -36,55 +36,6 @@
     text-align: left;
   }
 
-  &-label {
-    color: #f65161;
-    font-size: large;
-    font-family: "Open Sans", sans-serif;
-    text-transform: uppercase;
-    margin: 15px 0;
-    letter-spacing: 1px;
-  }
-
-  &-edit-id {
-    color: #ffffffc9;
-    font-size: large;
-    font-family: "Open Sans", sans-serif;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    letter-spacing: 1px;
-  }
-
-  &-input {
-    background: #2e2e2e;
-    color: #ffffffc9;
-    font-size: x-large;
-    font-family: "Open Sans", sans-serif;
-    height: 50px;
-    border: none;
-    padding: 0 15px;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-  }
-
-  &-select {
-    background: #2e2e2e;
-    font-size: x-large;
-    font-family: "Open Sans", sans-serif;
-    height: 50px;
-    border: none;
-    padding: 0 15px;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    color: #ffffff93;
-  }
-
-  &-option {
-    padding: 0 15px;
-    outline: transparent;
-    border: none;
-    color: #ffffffc9;
-  }
-
   &-close-icon {
     position: absolute;
     color: #b4b4b4;
@@ -135,15 +86,4 @@
     border-radius: 3px;
     margin-left: 15px;
   }
-
-  &-text {
-    margin-top: 15px;
-    color: #ffffffc9;
-    font-size: 18px;
-    font-family: "Open Sans", sans-serif;
-  }
-}
-
-input[type="date"] {
-  color: #555555;
 }

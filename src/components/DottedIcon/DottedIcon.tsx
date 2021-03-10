@@ -2,6 +2,8 @@ import React from "react";
 
 import { ModalWindow } from "../ModalWindow";
 import { DottedIconImage } from "./DottedIconImage";
+import { EditMovieModalContent } from "../EditMovieModalContent";
+import { DeleteMovieModalContent } from "../DeleteMovieModalContent";
 import "./DottedIcon.scss";
 interface DottedIconState {
   IsDropdownVisible: boolean;
@@ -17,51 +19,51 @@ export class DottedIcon extends React.Component<React.Attributes, DottedIconStat
 
   private modalRef = React.createRef<HTMLDivElement>();
 
-  openDropdown(): void {
+  openDropdown = (): void => {
     this.setState({
       IsDropdownVisible: true,
     });
-  }
+  };
 
-  closeDropdown(): void {
+  closeDropdown = (): void => {
     this.setState({
       IsDropdownVisible: false,
     });
-  }
+  };
 
-  openEditModal(): void {
+  openEditModal = (): void => {
     this.setState({
       IsEditModalVisible: true,
     });
     this.closeDropdown();
-  }
+  };
 
-  closeEditModal(): void {
+  closeEditModal = (): void => {
     this.setState({
       IsEditModalVisible: false,
     });
-  }
+  };
 
-  openDeleteModal(): void {
+  openDeleteModal = (): void => {
     this.setState({
       IsDeleteModalVisible: true,
     });
     this.closeDropdown();
-  }
+  };
 
-  closeDeleteModal(): void {
+  closeDeleteModal = (): void => {
     this.setState({
       IsDeleteModalVisible: false,
     });
-  }
+  };
 
-  componentDidMount(): void {
+  componentDidMount = (): void => {
     document.addEventListener("mousedown", this.handleClickOutside);
-  }
+  };
 
-  componentWillUnmount(): void {
+  componentWillUnmount = (): void => {
     document.removeEventListener("mousedown", this.handleClickOutside);
-  }
+  };
 
   handleClickOutside = (event: Event): void => {
     if (
@@ -76,51 +78,45 @@ export class DottedIcon extends React.Component<React.Attributes, DottedIconStat
   render(): React.ReactNode {
     return (
       <div className="dotted-icon">
-        <div className="dotted-icon-image" onClick={this.openDropdown.bind(this)}>
+        <div className="dotted-icon-image" onClick={this.openDropdown}>
           <DottedIconImage />
         </div>
-        {this.state.IsDropdownVisible ? (
+        {this.state.IsDropdownVisible && (
           <div className="dotted-icon-modal" ref={this.modalRef}>
-            <div
-              className="dotted-icon-close-icon"
-              onClick={this.closeDropdown.bind(this)}
-            >
+            <div className="dotted-icon-close-icon" onClick={this.closeDropdown}>
               X
             </div>
-            <div
-              className="dotted-icon-option"
-              onClick={this.openEditModal.bind(this)}
-            >
+            <div className="dotted-icon-option" onClick={this.openEditModal}>
               Edit
             </div>
-            <div
-              className="dotted-icon-option"
-              onClick={this.openDeleteModal.bind(this)}
-            >
+            <div className="dotted-icon-option" onClick={this.openDeleteModal}>
               Delete
             </div>
           </div>
-        ) : null}
-        {this.state.IsEditModalVisible ? (
+        )}
+        {this.state.IsEditModalVisible && (
           <ModalWindow
             IsModalVisible={this.state.IsEditModalVisible}
             modalType="edit"
             modalTitle="EDIT MOVIE"
             leftButton="RESET"
             rightButton="SAVE"
-            closeModal={this.closeEditModal.bind(this)}
-          />
-        ) : null}
-        {this.state.IsDeleteModalVisible ? (
+            closeModal={this.closeEditModal}
+          >
+            <EditMovieModalContent />
+          </ModalWindow>
+        )}
+        {this.state.IsDeleteModalVisible && (
           <ModalWindow
             IsModalVisible={this.state.IsDeleteModalVisible}
             modalType="delete"
             modalTitle="DELETE MOVIE"
-            modalText="Are you sure you want to delete this movie?"
             rightButton="CONFIRM"
-            closeModal={this.closeDeleteModal.bind(this)}
-          />
-        ) : null}
+            closeModal={this.closeDeleteModal}
+          >
+            <DeleteMovieModalContent />
+          </ModalWindow>
+        )}
       </div>
     );
   }

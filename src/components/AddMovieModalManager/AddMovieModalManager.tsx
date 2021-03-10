@@ -1,46 +1,50 @@
 import React from "react";
 
 import { ModalWindow } from "../ModalWindow";
-import "./AddMovieButton.scss";
-interface AddMovieButtonState {
+import { AddMovieModalContent } from "../AddMovieModalContent";
+import "./AddMovieModalManager.scss";
+
+interface AddMovieModalManagerState {
   IsModalVisible: boolean;
 }
-export class AddMovieButton extends React.Component<
+export class AddMovieModalManager extends React.Component<
   React.Attributes,
-  AddMovieButtonState
+  AddMovieModalManagerState
 > {
-  state: AddMovieButtonState = {
+  state: AddMovieModalManagerState = {
     IsModalVisible: false,
   };
 
-  openModal(): void {
+  openModal = () => {
     this.setState({
       IsModalVisible: true,
     });
-  }
+  };
 
-  closeModal(): void {
+  closeModal = () => {
     this.setState({
       IsModalVisible: false,
     });
-  }
+  };
 
   render(): React.ReactNode {
     return (
       <>
-        <button className="add-movie-button" onClick={this.openModal.bind(this)}>
+        <button className="add-movie-button" onClick={this.openModal}>
           + add movie
         </button>
-        {this.state.IsModalVisible ? (
+        {this.state.IsModalVisible && (
           <ModalWindow
             IsModalVisible={this.state.IsModalVisible}
             modalType="add"
             modalTitle="ADD MOVIE"
             leftButton="RESET"
             rightButton="SUBMIT"
-            closeModal={this.closeModal.bind(this)}
-          />
-        ) : null}
+            closeModal={this.closeModal}
+          >
+            <AddMovieModalContent />
+          </ModalWindow>
+        )}
       </>
     );
   }

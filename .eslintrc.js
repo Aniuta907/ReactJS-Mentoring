@@ -12,7 +12,8 @@ module.exports = {
     },
     },
     rules:  {
-      "react/prop-types": "off"
+      "react/prop-types": "off",
+      "@typescript-eslint/explicit-function-return-type": 0
     },
     settings:  {
       react:  {
