@@ -3,7 +3,6 @@ import React from "react";
 import "./ModalWindow.scss";
 
 interface ModalWindowProps {
-  modalType: string;
   modalTitle: string;
   leftButton?: string;
   rightButton?: string;

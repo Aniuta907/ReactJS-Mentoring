@@ -97,7 +97,6 @@ export class DottedIcon extends React.Component<React.Attributes, DottedIconStat
         {this.state.IsEditModalVisible && (
           <ModalWindow
             IsModalVisible={this.state.IsEditModalVisible}
-            modalType="edit"
             modalTitle="EDIT MOVIE"
             leftButton="RESET"
             rightButton="SAVE"
@@ -109,7 +108,6 @@ export class DottedIcon extends React.Component<React.Attributes, DottedIconStat
         {this.state.IsDeleteModalVisible && (
           <ModalWindow
             IsModalVisible={this.state.IsDeleteModalVisible}
-            modalType="delete"
             modalTitle="DELETE MOVIE"
             rightButton="CONFIRM"
             closeModal={this.closeDeleteModal}

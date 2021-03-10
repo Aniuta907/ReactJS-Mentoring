@@ -36,7 +36,6 @@ export class AddMovieModalManager extends React.Component<
         {this.state.IsModalVisible && (
           <ModalWindow
             IsModalVisible={this.state.IsModalVisible}
-            modalType="add"
             modalTitle="ADD MOVIE"
             leftButton="RESET"
             rightButton="SUBMIT"
