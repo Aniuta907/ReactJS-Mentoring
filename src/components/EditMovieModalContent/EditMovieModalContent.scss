@@ -1,0 +1,35 @@
+.edit-movie {
+  &-label {
+    color: #f65161;
+    font-size: large;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    margin: 15px 0;
+    letter-spacing: 1px;
+  }
+
+  &-edit-id {
+    color: #ffffffc9;
+    font-size: large;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+
+  &-input {
+    background: #2e2e2e;
+    color: #ffffffc9;
+    font-size: x-large;
+    font-family: "Open Sans", sans-serif;
+    height: 50px;
+    border: none;
+    padding: 0 15px;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+  }
+}
+
+input[type="date"] {
+  color: #555555;
+}

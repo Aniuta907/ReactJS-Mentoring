@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Header.scss";
 import { Logo } from "../Logo";
-import { AddMovieButton } from "../AddMovieButton";
+import { AddMovieModalManager } from "../AddMovieModalManager";
 import { SearchBox } from "../SearchBox";
 
 export const Header: React.FC = () => {
@@ -13,8 +13,8 @@ export const Header: React.FC = () => {
         <Logo />
       </div>
       <div className="header-span">find your movie</div>
-      <AddMovieButton />
       <SearchBox />
+      <AddMovieModalManager />
     </div>
   );
 };

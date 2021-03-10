@@ -1,0 +1,45 @@
+.add-movie {
+  &-label {
+    color: #f65161;
+    font-size: large;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    margin: 15px 0;
+    letter-spacing: 1px;
+  }
+
+  &-input {
+    background: #2e2e2e;
+    color: #ffffffc9;
+    font-size: x-large;
+    font-family: "Open Sans", sans-serif;
+    height: 50px;
+    border: none;
+    padding: 0 15px;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+  }
+
+  &-select {
+    background: #2e2e2e;
+    font-size: x-large;
+    font-family: "Open Sans", sans-serif;
+    height: 50px;
+    border: none;
+    padding: 0 15px;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    color: #ffffff93;
+  }
+
+  &-option {
+    padding: 0 15px;
+    outline: transparent;
+    border: none;
+    color: #ffffffc9;
+  }
+}
+
+input[type="date"] {
+  color: #555555;
+}
