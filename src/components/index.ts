@@ -5,3 +5,4 @@ export { ResultCount } from "./ResultCount";
 export { MoviesList } from "./MoviesList";
 export { Footer } from "./Footer";
 export { ErrorBoundary } from "./ErrorBoundary";
+export { SearchIconButton } from "./SearchIconButton";

@@ -1,0 +1,18 @@
+.movie-details-page {
+  height: 480px;
+  width: 100%;
+  border-bottom: 12px solid #3e3e3e;
+
+  &-background {
+    background: url(../../assets/images/header-background.jpg);
+    width: 100%;
+    height: 480px;
+    filter: brightness(15%) blur(2px);
+    position: absolute;
+  }
+}
+
+.logo-div {
+  margin-top: 20px;
+  margin-left: 100px;
+}

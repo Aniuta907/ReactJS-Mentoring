@@ -1,12 +1,12 @@
 .logo {
-    color: #f65261;
-    float: left;
-    position: relative;
-    letter-spacing: 1px;
-    font-size: 22px;
-    font-family: 'Open Sans', sans-serif;
-  
-    &_span {
-      font-weight: bold;
-    }
+  color: #f65261;
+  float: left;
+  position: absolute;
+  letter-spacing: 1px;
+  font-size: 22px;
+  font-family: "Open Sans", sans-serif;
+
+  &_span {
+    font-weight: bold;
   }
+}

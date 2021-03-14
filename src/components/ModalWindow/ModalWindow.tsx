@@ -1,5 +1,6 @@
 import React from "react";
 
+import useClickOutside from "../useClickOutside";
 import "./ModalWindow.scss";
 
 interface ModalWindowProps {
@@ -9,57 +10,44 @@ interface ModalWindowProps {
   IsModalVisible: boolean;
   closeModal: () => void;
 }
-export class ModalWindow extends React.Component<ModalWindowProps> {
-  private modalRef = React.createRef<HTMLDivElement>();
 
-  componentDidMount(): void {
-    document.addEventListener("mousedown", this.handleClickOutside);
-  }
+export const ModalWindow: React.FC<ModalWindowProps> = ({
+  modalTitle,
+  leftButton,
+  rightButton,
+  IsModalVisible,
+  closeModal,
+  children,
+}) => {
+  const modalRef = React.createRef<HTMLDivElement>();
 
-  componentWillUnmount(): void {
-    document.removeEventListener("mousedown", this.handleClickOutside);
-  }
+  useClickOutside(modalRef, IsModalVisible, closeModal);
 
-  handleClickOutside = (event: Event): void => {
-    if (
-      this.props.IsModalVisible &&
-      !this.modalRef.current?.contains(event.target as Node)
-    ) {
-      this.props.closeModal();
-    }
-  };
+  return (
+    <>
+      {IsModalVisible && (
+        <div className="modal-shim">
+          <div className="modal" ref={modalRef}>
+            <div className="modal-close-icon" onClick={closeModal}>
+              X
+            </div>
+            <div className="modal-guts">
+              <span className="modal-span">{modalTitle}</span>
 
-  render(): React.ReactNode {
-    return (
-      <>
-        {this.props.IsModalVisible && (
-          <div className="modal-shim">
-            <div className="modal" ref={this.modalRef}>
-              <div className="modal-close-icon" onClick={this.props.closeModal}>
-                X
-              </div>
-              <div className="modal-guts">
-                <span className="modal-span">{this.props.modalTitle}</span>
+              {children}
 
-                {this.props.children}
-
-                <div className="modal-footer">
-                  {this.props.leftButton && (
-                    <button className="modal-left-button">
-                      {this.props.leftButton}
-                    </button>
-                  )}
-                  {this.props.rightButton && (
-                    <button className="modal-right-button">
-                      {this.props.rightButton}
-                    </button>
-                  )}
-                </div>
+              <div className="modal-footer">
+                {leftButton && (
+                  <button className="modal-left-button">{leftButton}</button>
+                )}
+                {rightButton && (
+                  <button className="modal-right-button">{rightButton}</button>
+                )}
               </div>
             </div>
           </div>
-        )}
-      </>
-    );
-  }
-}
+        </div>
+      )}
+    </>
+  );
+};
