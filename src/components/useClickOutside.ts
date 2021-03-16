@@ -17,7 +17,7 @@ const useClickOutside = (
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  });
+  }, [IsModalVisible, closeModal]);
 };
 
 export default useClickOutside;
