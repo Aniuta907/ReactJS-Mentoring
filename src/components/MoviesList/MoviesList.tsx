@@ -1,60 +1,14 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import "./MoviesList.scss";
 import { MovieCard } from "../MovieCard";
-
-const movies = [
-  {
-    year: "2004",
-    title: "Pulp fiction",
-    genre: "Action & Adventure",
-    id: "0",
-  },
-  {
-    year: "2004",
-    title: "Pulp fiction",
-    genre: "Action & Adventure",
-    id: "1",
-  },
-  {
-    year: "2004",
-    title: "Pulp fiction",
-    genre: "Action & Adventure",
-    id: "2",
-  },
-  {
-    year: "2004",
-    title: "Pulp fiction",
-    genre: "Action & Adventure",
-    id: "3",
-  },
-  {
-    year: "2004",
-    title: "Pulp fiction",
-    genre: "Action & Adventure",
-    id: "4",
-  },
-  {
-    year: "2004",
-    title: "Pulp fiction",
-    genre: "Action & Adventure",
-    id: "5",
-  },
-  {
-    year: "2004",
-    title: "Pulp fiction",
-    genre: "Action & Adventure",
-    id: "6",
-  },
-  {
-    year: "2004",
-    title: "Pulp fiction",
-    genre: "Action & Adventure",
-    id: "7",
-  },
-];
+import { movies } from "../../assets/MockedData";
 
 export const MoviesList: React.FC = () => {
+  const onMovieClick = useCallback(() => {
+    console.log("movie");
+  }, []);
+
   return (
     <div className="list-wrapper">
       {movies.map((movie) => (
@@ -63,6 +17,7 @@ export const MoviesList: React.FC = () => {
           genre={movie.genre}
           year={movie.year}
           key={movie.id}
+          onMovieClick={onMovieClick}
         />
       ))}
     </div>
