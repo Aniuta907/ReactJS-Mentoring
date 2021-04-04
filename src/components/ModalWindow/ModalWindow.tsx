@@ -1,20 +1,16 @@
 import React from "react";
 
-import useClickOutside from "../useClickOutside";
+import useClickOutside from "../../hooks/useClickOutside";
 import "./ModalWindow.scss";
 
 interface ModalWindowProps {
   modalTitle: string;
-  leftButton?: string;
-  rightButton?: string;
   IsModalVisible: boolean;
   closeModal: () => void;
 }
 
 export const ModalWindow: React.FC<ModalWindowProps> = ({
   modalTitle,
-  leftButton,
-  rightButton,
   IsModalVisible,
   closeModal,
   children,
@@ -33,17 +29,7 @@ export const ModalWindow: React.FC<ModalWindowProps> = ({
             </div>
             <div className="modal-guts">
               <span className="modal-span">{modalTitle}</span>
-
               {children}
-
-              <div className="modal-footer">
-                {leftButton && (
-                  <button className="modal-left-button">{leftButton}</button>
-                )}
-                {rightButton && (
-                  <button className="modal-right-button">{rightButton}</button>
-                )}
-              </div>
             </div>
           </div>
         </div>

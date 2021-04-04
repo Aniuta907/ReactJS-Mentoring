@@ -15,6 +15,7 @@ export const AddMovieModalManager: React.FC = () => {
     setModalVisibility(false);
   };
 
+
   return (
     <>
       <button className="add-movie-button" onClick={openModal}>
@@ -24,11 +25,9 @@ export const AddMovieModalManager: React.FC = () => {
         <ModalWindow
           IsModalVisible={IsModalVisible}
           modalTitle="ADD MOVIE"
-          leftButton="RESET"
-          rightButton="SUBMIT"
           closeModal={closeModal}
         >
-          <AddMovieModalContent />
+          <AddMovieModalContent closeModal={closeModal}/>
         </ModalWindow>
       )}
     </>

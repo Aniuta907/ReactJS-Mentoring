@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./HomePage.scss";
-import { FilterBar } from "../../components";
+import { FilterBar, Header } from "../../components";
 import { Dropdown } from "../../components";
 import { ResultCount } from "../../components";
 import { MoviesList } from "../../components";
@@ -9,6 +9,7 @@ import { MoviesList } from "../../components";
 export const HomePage: React.FC = () => {
   return (
     <main>
+      <Header />
       <div className="wrapper-div">
         <FilterBar />
         <Dropdown />
