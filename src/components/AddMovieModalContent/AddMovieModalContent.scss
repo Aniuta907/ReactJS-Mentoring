@@ -1,5 +1,6 @@
 .add-movie {
   &-label {
+    display: block;
     color: #f65161;
     font-size: large;
     font-family: "Open Sans", sans-serif;
@@ -14,29 +15,11 @@
     font-size: x-large;
     font-family: "Open Sans", sans-serif;
     height: 50px;
+    width: 100%;
     border: none;
     padding: 0 15px;
     letter-spacing: 1px;
     margin-bottom: 15px;
-  }
-
-  &-select {
-    background: #2e2e2e;
-    font-size: x-large;
-    font-family: "Open Sans", sans-serif;
-    height: 50px;
-    border: none;
-    padding: 0 15px;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    color: #ffffff93;
-  }
-
-  &-option {
-    padding: 0 15px;
-    outline: transparent;
-    border: none;
-    color: #ffffffc9;
   }
 }
 

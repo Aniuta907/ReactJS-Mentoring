@@ -1,5 +1,6 @@
 .edit-movie {
   &-label {
+    display: block;
     color: #f65161;
     font-size: large;
     font-family: "Open Sans", sans-serif;
@@ -58,6 +59,7 @@
     font-size: x-large;
     font-family: "Open Sans", sans-serif;
     height: 50px;
+    width: 100%;
     border: none;
     padding: 0 15px;
     letter-spacing: 1px;

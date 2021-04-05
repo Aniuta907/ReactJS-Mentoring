@@ -1,9 +1,10 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Field, Form, Formik } from "formik";
+import * as Yup from "yup";
 
 import "./EditMovieModalContent.scss";
 import { MovieGenreSelect } from "../MovieGenreSelect";
-import { UPDATE_MOVIE } from "../../store/actionTypes/movies";
 import { RootState } from "../../store/reducers";
 import { editMovie, setEditMovie } from "../../store/actions/movies";
 
@@ -15,112 +16,99 @@ export const EditMovieModalContent: React.FC<EditMovieModalContentProps> = ({han
   const movieToEdit = useSelector((state: RootState) => state.moviesData.editMovie);
   const { id, title, runtime, overview, poster_path, release_date, genres } = movieToEdit;
 
-  const initialState = {
-    id,
-    title,
-    poster_path,
-    runtime,
-    overview,
-    release_date,
-    genres,
-  };
-
-  const reducer = (state, action) => {
-    const { field, value } = action.payload;
-    let elementToUpdate = state[field];
-    switch (action.type) {
-      case UPDATE_MOVIE:
-        elementToUpdate = value;
-        return {
-          ...state,
-          [field]: elementToUpdate,
-        };
-
-      default:
-        break;
-    }
-  };
-
-  const [state, dispatch] = useReducer(reducer, initialState);
   const dispatchRedux = useDispatch();
 
-  const handleChange = (event) => {
-    event.preventDefault();
-    dispatch({
-      type: UPDATE_MOVIE,
-      payload: {
-        field: event.target.name,
-        value: event.target.value,
-      },
-    });
-  };
-
-  const handleEditSubmitForm = () => {
-    const movieEdit = {
-      ...state,
-      runtime: Number(state.runtime),
-    };
-    dispatchRedux(setEditMovie(movieEdit));
-    dispatchRedux(editMovie(movieEdit));
-    handleEditSubmit();
-  };
-
   return (
-  <>  
-    <>
+    <Formik
+      initialValues={{
+        id,
+        title,
+        poster_path,
+        runtime,
+        overview,
+        release_date,
+        genres,
+      }}
+
+      onSubmit={(values) => {
+        const movieEdit = {
+          ...values,
+          runtime: Number(values.runtime),
+        };
+        dispatchRedux(setEditMovie(movieEdit));
+        dispatchRedux(editMovie(movieEdit));
+        handleEditSubmit();
+      }}
+
+      validationSchema={Yup.object({
+        title: Yup.string()
+          .min(1, 'Please enter title more than 1 character')
+          .max(70, 'Please enter title less than 70 characters')
+          .required('Please enter title'),
+        release_date: Yup.date().required('Please enter release date'),
+        poster_path: Yup.string().url().required('Please enter poster path'),
+        genres: Yup.array().required('Please enter genre'),
+        overview: Yup.string()
+          .min(1, 'Please enter overview more than 1 character')
+          .max(700, 'Please enter overview less than 700 characters')
+          .required('Please enter overview'),
+        runtime: Yup.number()
+          .integer('Runtime should be an integer')
+          .min(1, 'Please enter runtime more than 1 minutes')
+          .required('Please enter runtime'),
+      })}
+    >
+    <Form>
       <label className="edit-movie-label">movie id</label>
-      <input className="edit-movie-input" name="id" onChange={handleChange} value={state.id}/>
+      <Field className="edit-movie-input" name="id" type="text"/>
 
       <label className="edit-movie-label">title</label>
-      <input
-        onChange={handleChange}
-        value={state.title}
+      <Field
         name="title"
+        type="text"
         className="edit-movie-input"
         placeholder="Title here"
       />
 
       <label className="edit-movie-label">release date</label>
-      <input value={state.release_date} name="release_date" type="date" onChange={handleChange} className="edit-movie-input" />
+      <Field name="release_date" type="date" className="edit-movie-input" />
 
       <label className="edit-movie-label">movie url</label>
-      <input
-        value={state.poster_path}
+      <Field
         name="poster_path"
+        type="url"
         className="edit-movie-input"
-        onChange={handleChange}
         placeholder="Movie URL here"
       />
 
       <label className="edit-movie-label">genre</label>
 
-      <MovieGenreSelect onChange={handleChange} value={state.genres}/>
+      <Field className="add-movie-select" name="genres" as={MovieGenreSelect}/>
 
       <label className="edit-movie-label">overview</label>
-      <input
+      <Field
         className="edit-movie-input"
-        onChange={handleChange}
+        type="text"
         placeholder="Overview here"
-        value={state.overview}
         name="overview"
       />
 
       <label className="edit-movie-label">runtime</label>
-      <input
+      <Field
         className="edit-movie-input"
-        onChange={handleChange}
         placeholder="Runtime here"
-        value={state.runtime}
         name="runtime"
+        type="text"
       />  
-    </>
     
-    <div className="edit-movie-footer">
-      <button className="edit-movie-left-button">RESET</button>
-      <button className="edit-movie-right-button" onClick={handleEditSubmitForm}>
-        CONFIRM
-       </button>
-    </div>
-  </>
+      <div className="edit-movie-footer">
+        <button className="edit-movie-left-button" type="reset">RESET</button>
+        <button className="edit-movie-right-button" type="submit">
+          CONFIRM
+        </button>
+      </div>
+
+    </Form>
+  </Formik>
   );
 };
