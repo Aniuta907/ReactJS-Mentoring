@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 
 import "./MovieDetailsPage.scss";
 import { Logo } from "../../components/Logo";
@@ -9,14 +10,16 @@ import { useSelector } from "react-redux";
 import { selectMovies } from "../../store/selectors";
 
 export const MovieDetailsPage: React.FC = () => {
-  const [currentMovie, setCurrentMovie] = useState(181808);
+  const [currentMovie, setCurrentMovie] = useState(0);
+  const { urlID } = useParams<{ urlID: string }>();
   
   let { movies } = useSelector(selectMovies);
   
-  const getCurrentMovie = (movieID) => {
-    const current = movies.find(({ id }) => id === movieID);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const current = movies.find(({ id }) => id === +urlID);
     setCurrentMovie(current);
-  };
+  }, [urlID, movies]);
 
   return (
     <main>
@@ -33,9 +36,7 @@ export const MovieDetailsPage: React.FC = () => {
         <Dropdown />
       </div>
       <ResultCount year="39" />
-      <MoviesList                 
-        getCurrentMovie={getCurrentMovie}
-      />
+      <MoviesList />
     </main>
   );
 };

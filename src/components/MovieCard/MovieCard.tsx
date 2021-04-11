@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 import { DottedIcon } from "../DottedIcon";
 import "./MovieCard.scss";
@@ -8,7 +9,6 @@ interface MovieCardProps {
   genres: Array<string>;
   posterPath: string;
   id: string;
-  onClick: () => void;
 }
 
 export const MovieCard: React.FC<MovieCardProps> = ({
@@ -17,14 +17,15 @@ export const MovieCard: React.FC<MovieCardProps> = ({
   genres,
   posterPath,
   id,
-  onClick,
 }) => {
   return (
     <div className="movie">
       <div className="movie-dropdown">
         <DottedIcon id={id} />
       </div>
-      <img className="movie-image" src={posterPath} onClick={onClick} />
+      <Link to={`/movie/${id}`}>
+        <img className="movie-image" src={posterPath} />
+      </Link>
       <div className="movie-footer">
         <div className="movie-wrapper">
           <span className="movie-title movie-text">{title}</span>

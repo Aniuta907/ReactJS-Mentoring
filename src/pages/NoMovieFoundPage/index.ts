@@ -1,0 +1,1 @@
+export { NoMovieFoundPage } from './NoMovieFoundPage';
