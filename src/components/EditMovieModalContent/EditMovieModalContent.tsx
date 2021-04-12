@@ -1,11 +1,11 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 
 import "./EditMovieModalContent.scss";
 import { MovieGenreSelect } from "../MovieGenreSelect";
-import { RootState } from "../../store/reducers";
+import { useAppSelector } from "../../store/reducers";
 import { editMovie, setEditMovie } from "../../store/actions/movies";
 
 interface EditMovieModalContentProps {
@@ -13,7 +13,7 @@ interface EditMovieModalContentProps {
 }
 
 export const EditMovieModalContent: React.FC<EditMovieModalContentProps> = ({handleEditSubmit}) => {
-  const movieToEdit = useSelector((state: RootState) => state.moviesData.editMovie);
+  const movieToEdit = useAppSelector(state => state.moviesData.editMovie);
   const { id, title, runtime, overview, poster_path, release_date, genres } = movieToEdit;
 
   const dispatchRedux = useDispatch();
@@ -34,13 +34,17 @@ export const EditMovieModalContent: React.FC<EditMovieModalContentProps> = ({han
         const movieEdit = {
           ...values,
           runtime: Number(values.runtime),
+          id: Number(values.id)
         };
-        dispatchRedux(setEditMovie(movieEdit));
+        dispatchRedux(setEditMovie(movieEdit.id));
         dispatchRedux(editMovie(movieEdit));
         handleEditSubmit();
       }}
 
       validationSchema={Yup.object({
+        id: Yup.number()
+          .integer('id should be an integer')
+          .required('Please enter id'),
         title: Yup.string()
           .min(1, 'Please enter title more than 1 character')
           .max(70, 'Please enter title less than 70 characters')

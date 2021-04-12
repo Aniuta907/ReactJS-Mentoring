@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { ModalWindow } from "../ModalWindow";
 import { DottedIconImage } from "./DottedIconImage";
@@ -12,10 +12,7 @@ import {
   setDeleteMovie,
   setEditMovie,
 } from "../../store/actions/movies";
-import {
-  selectDeleteMovie,
-  selectMovies,
-} from "../../store/selectors";
+import { useAppSelector } from "../../store/reducers";
 
 interface DottedIconProps {
   id: string;
@@ -25,8 +22,9 @@ export const DottedIcon: React.FC<DottedIconProps> = ({ id }) => {
   const [IsDropdownVisible, setDropdownVisibility] = useState(false);
   const [IsEditModalVisible, setEditModalVisibility] = useState(false);
   const [IsDeleteModalVisible, setDeleteModalVisibility] = useState(false);
-
   const modalRef = React.createRef<HTMLDivElement>();
+  const dispatch = useDispatch();
+  const movieToDelete = useAppSelector(state => state.moviesData.deleteMovie);
 
   const openDropdown = (): void => {
     setDropdownVisibility(true);
@@ -37,8 +35,7 @@ export const DottedIcon: React.FC<DottedIconProps> = ({ id }) => {
   };
 
   const openEditModal = (movieID: string): void => {
-    const movie = movies.find(({ id }) => id === movieID);
-    dispatch(setEditMovie(movie));
+    dispatch(setEditMovie(movieID));
     setEditModalVisibility(true);
     closeDropdown();
   };
@@ -47,11 +44,8 @@ export const DottedIcon: React.FC<DottedIconProps> = ({ id }) => {
     setEditModalVisibility(false);
   };
 
-  const { movies } = useSelector(selectMovies);
-
   const openDeleteModal = (movieID: string): void => {
-    const movie = movies.find(({ id }) => id === movieID);
-    dispatch(setDeleteMovie(movie));
+    dispatch(setDeleteMovie(movieID));
     setDeleteModalVisibility(true);
     closeDropdown();
   };
@@ -61,10 +55,6 @@ export const DottedIcon: React.FC<DottedIconProps> = ({ id }) => {
   };
 
   useClickOutside(modalRef, IsDropdownVisible, closeDropdown);
-
-  const dispatch = useDispatch();
-
-  const { movieToDelete } = useSelector(selectDeleteMovie);
 
   const handleEditSubmit = () => {
     closeEditModal();

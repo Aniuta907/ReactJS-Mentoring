@@ -5,15 +5,11 @@ import { Logo } from "../../components/Logo";
 import { MovieDetails } from "../../components/MovieDetails";
 import { SearchIconButton } from "../../components/SearchIconButton";
 import { Dropdown, FilterBar, MoviesList, ResultCount } from "../../components";
-import { useSelector } from "react-redux";
-import { selectMovies } from "../../store/selectors";
 
 export const MovieDetailsPage: React.FC = () => {
   const [currentMovie, setCurrentMovie] = useState(181808);
   
-  let { movies } = useSelector(selectMovies);
-  
-  const getCurrentMovie = (movieID) => {
+  const getCurrentMovie = (movieID, movies) => {
     const current = movies.find(({ id }) => id === movieID);
     setCurrentMovie(current);
   };
@@ -33,9 +29,7 @@ export const MovieDetailsPage: React.FC = () => {
         <Dropdown />
       </div>
       <ResultCount year="39" />
-      <MoviesList                 
-        getCurrentMovie={getCurrentMovie}
-      />
+      <MoviesList getCurrentMovie={getCurrentMovie}/>
     </main>
   );
 };

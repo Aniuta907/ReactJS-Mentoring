@@ -1,18 +1,18 @@
-import React, { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import "./MoviesList.scss";
 import { MovieCard } from "../MovieCard";
-import { RootState } from "../../store/reducers";
+import { useAppSelector } from "../../store/reducers";
 import { fetchMovies } from "../../store/actions/movies";
 
 interface MoviesListProps {
-  getCurrentMovie?: (movieID) => void;
+  getCurrentMovie?: (movieID, movies) => void;
 }
 
 export const MoviesList: React.FC<MoviesListProps> = ({getCurrentMovie}) => {
   const dispatch = useDispatch();
-  const movies = useSelector((state: RootState) => state.moviesData.movies);
+  const { movies } = useAppSelector(state => state.moviesData);
 
   // const onMovieClick = useCallback(() => {
   //   console.log("movie");
@@ -32,7 +32,7 @@ export const MoviesList: React.FC<MoviesListProps> = ({getCurrentMovie}) => {
           posterPath={movie.poster_path}
           key={movie.id}
           id={movie.id}
-          onClick={()=>getCurrentMovie(movie.id)}
+          onClick={()=>getCurrentMovie(movie.id, movies)}
         />
       ))}
     </div>
