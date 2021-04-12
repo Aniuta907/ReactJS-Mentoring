@@ -6,12 +6,13 @@ import { Logo } from "../../components/Logo";
 import { MovieDetails } from "../../components/MovieDetails";
 import { SearchIconButton } from "../../components/SearchIconButton";
 import { Dropdown, FilterBar, MoviesList, ResultCount } from "../../components";
+import { useAppSelector } from "../../store/reducers";
 
 export const MovieDetailsPage: React.FC = () => {
   const [currentMovie, setCurrentMovie] = useState(0);
   const { urlID } = useParams<{ urlID: string }>();
   
-  let { movies } = useSelector(selectMovies);
+  let { movies } = useAppSelector(state => state.moviesData);
   
   useEffect(() => {
     window.scrollTo(0, 0);
