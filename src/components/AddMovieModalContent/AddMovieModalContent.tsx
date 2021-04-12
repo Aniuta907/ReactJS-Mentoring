@@ -29,6 +29,7 @@ export const AddMovieModalContent: React.FC<AddMovieModalContentProps> = ({close
         const movieToAdd = {
           ...values,
           runtime: Number(values.runtime),
+          release_date: String(values.release_date)
         };
     
         dispatchRedux(setAddMovie(movieToAdd));
@@ -42,7 +43,7 @@ export const AddMovieModalContent: React.FC<AddMovieModalContentProps> = ({close
           .min(1, 'Please enter title more than 1 character')
           .max(70, 'Please enter title less than 70 characters')
           .required('Please enter title'),
-        release_date: Yup.date().required('Please enter release date'),
+        release_date: Yup.string().required('Please enter release date'),
         poster_path: Yup.string().url().required('Please enter poster path'),
         genres: Yup.string().required('Please enter genre'),
         overview: Yup.string()

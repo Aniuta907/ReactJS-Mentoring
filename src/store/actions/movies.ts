@@ -4,15 +4,12 @@ import {
   FETCH_MOVIES_FAILURE,
   SET_EDIT_MOVIE,
   SET_DELETE_MOVIE,
-  DELETE_MOVIE,
   DELETE_MOVIE_SUCCESS,
   DELETE_MOVIE_FAILURE,
   SET_ADD_MOVIE,
-  ADD_MOVIE,
   ADD_MOVIE_SUCCESS,
   ADD_MOVIE_FAILURE,
   EDIT_MOVIE_SUCCESS,
-  EDIT_MOVIE,
   EDIT_MOVIE_FAILURE,
 } from "../actionTypes/movies";
 import { FETCH_MOVIES_API_URL } from "../../consts";
@@ -37,18 +34,17 @@ export const fetchMovies = () => {
   };
 };
 
-export const setEditMovie = (movie) => {
+export const setEditMovie = (movieId) => {
   return (dispatch: AppDispatch) => {
     dispatch({
       type: SET_EDIT_MOVIE,
-      payload: movie,
+      payload: movieId,
     });
   };
 };
 
 export const editMovie = (movie) => {
   return async (dispatch: AppDispatch) => {
-    dispatch({ type: EDIT_MOVIE });
     try {
       const response = await fetch(FETCH_MOVIES_API_URL, {
         method: "PUT",
@@ -79,18 +75,17 @@ export const editMovie = (movie) => {
   };
 };
 
-export const setDeleteMovie = (movie) => {
+export const setDeleteMovie = (movieId) => {
   return (dispatch: AppDispatch) => {
     dispatch({
       type: SET_DELETE_MOVIE,
-      payload: movie,
+      payload: movieId,
     });
   };
 };
 
 export const deleteMovie = (movieId) => {
   return async (dispatch: AppDispatch) => {
-    dispatch({ type: DELETE_MOVIE });
     try {
       await fetch(FETCH_MOVIES_API_URL + String(movieId), {
         method: "DELETE",
@@ -119,7 +114,6 @@ export const setAddMovie = (movie) => {
 
 export const addMovie = (movie) => {
   return async (dispatch: AppDispatch) => {
-    dispatch({ type: ADD_MOVIE });
     try {
       const response = await fetch(FETCH_MOVIES_API_URL, {
         method: "POST",

@@ -6,8 +6,6 @@ import { Logo } from "../../components/Logo";
 import { MovieDetails } from "../../components/MovieDetails";
 import { SearchIconButton } from "../../components/SearchIconButton";
 import { Dropdown, FilterBar, MoviesList, ResultCount } from "../../components";
-import { useSelector } from "react-redux";
-import { selectMovies } from "../../store/selectors";
 
 export const MovieDetailsPage: React.FC = () => {
   const [currentMovie, setCurrentMovie] = useState(0);

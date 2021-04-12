@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import "./MoviesList.scss";
 import { MovieCard } from "../MovieCard";
-import { RootState } from "../../store/reducers";
+import { useAppSelector } from "../../store/reducers";
 import { fetchMovies } from "../../store/actions/movies";
 
 export const MoviesList: React.FC = () => {
   const dispatch = useDispatch();
-  const movies = useSelector((state: RootState) => state.moviesData.movies);
+  const { movies } = useAppSelector(state => state.moviesData);
 
   // const onMovieClick = useCallback(() => {
   //   console.log("movie");
