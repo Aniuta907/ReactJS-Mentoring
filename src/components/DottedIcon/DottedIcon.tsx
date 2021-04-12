@@ -1,13 +1,27 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { ModalWindow } from "../ModalWindow";
 import { DottedIconImage } from "./DottedIconImage";
 import { EditMovieModalContent } from "../EditMovieModalContent";
 import { DeleteMovieModalContent } from "../DeleteMovieModalContent";
 import "./DottedIcon.scss";
-import useClickOutside from "../useClickOutside";
+import useClickOutside from "../../hooks/useClickOutside";
+import {
+  deleteMovie,
+  setDeleteMovie,
+  setEditMovie,
+} from "../../store/actions/movies";
+import {
+  selectDeleteMovie,
+  selectMovies,
+} from "../../store/selectors";
 
-export const DottedIcon: React.FC = () => {
+interface DottedIconProps {
+  id: string;
+}
+
+export const DottedIcon: React.FC<DottedIconProps> = ({ id }) => {
   const [IsDropdownVisible, setDropdownVisibility] = useState(false);
   const [IsEditModalVisible, setEditModalVisibility] = useState(false);
   const [IsDeleteModalVisible, setDeleteModalVisibility] = useState(false);
@@ -22,7 +36,9 @@ export const DottedIcon: React.FC = () => {
     setDropdownVisibility(false);
   };
 
-  const openEditModal = (): void => {
+  const openEditModal = (movieID: string): void => {
+    const movie = movies.find(({ id }) => id === movieID);
+    dispatch(setEditMovie(movie));
     setEditModalVisibility(true);
     closeDropdown();
   };
@@ -31,7 +47,11 @@ export const DottedIcon: React.FC = () => {
     setEditModalVisibility(false);
   };
 
-  const openDeleteModal = (): void => {
+  const { movies } = useSelector(selectMovies);
+
+  const openDeleteModal = (movieID: string): void => {
+    const movie = movies.find(({ id }) => id === movieID);
+    dispatch(setDeleteMovie(movie));
     setDeleteModalVisibility(true);
     closeDropdown();
   };
@@ -41,6 +61,18 @@ export const DottedIcon: React.FC = () => {
   };
 
   useClickOutside(modalRef, IsDropdownVisible, closeDropdown);
+
+  const dispatch = useDispatch();
+
+  const { movieToDelete } = useSelector(selectDeleteMovie);
+
+  const handleEditSubmit = () => {
+    closeEditModal();
+  };
+
+  const handleDeleteSubmit = () => {
+    dispatch(deleteMovie(movieToDelete.id));
+  };
 
   return (
     <div className="dotted-icon">
@@ -52,10 +84,10 @@ export const DottedIcon: React.FC = () => {
           <div className="dotted-icon-close-icon" onClick={closeDropdown}>
             X
           </div>
-          <div className="dotted-icon-option" onClick={openEditModal}>
+          <div className="dotted-icon-option" onClick={() => openEditModal(id)}>
             Edit
           </div>
-          <div className="dotted-icon-option" onClick={openDeleteModal}>
+          <div className="dotted-icon-option" onClick={() => openDeleteModal(id)}>
             Delete
           </div>
         </div>
@@ -64,21 +96,18 @@ export const DottedIcon: React.FC = () => {
         <ModalWindow
           IsModalVisible={IsEditModalVisible}
           modalTitle="EDIT MOVIE"
-          leftButton="RESET"
-          rightButton="SAVE"
           closeModal={closeEditModal}
         >
-          <EditMovieModalContent />
+          <EditMovieModalContent handleEditSubmit={handleEditSubmit}/>
         </ModalWindow>
       )}
       {IsDeleteModalVisible && (
         <ModalWindow
           IsModalVisible={IsDeleteModalVisible}
           modalTitle="DELETE MOVIE"
-          rightButton="CONFIRM"
           closeModal={closeDeleteModal}
         >
-          <DeleteMovieModalContent />
+          <DeleteMovieModalContent handleDeleteSubmit={handleDeleteSubmit}/>
         </ModalWindow>
       )}
     </div>

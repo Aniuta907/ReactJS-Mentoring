@@ -51,39 +51,4 @@
       color: #ffffff;
     }
   }
-
-  &-footer {
-    padding-top: 50px;
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  &-left-button {
-    background: #232323;
-    color: #f65161;
-    font-size: large;
-    z-index: 1;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    width: 160px;
-    height: 53px;
-    margin-left: 10px;
-    border-color: #f65161;
-    border-radius: 3px;
-  }
-
-  &-right-button {
-    background: #f65161;
-    color: white;
-    font-size: large;
-    z-index: 1;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    width: 160px;
-    height: 53px;
-    margin-left: 10px;
-    border-color: transparent;
-    border-radius: 3px;
-    margin-left: 15px;
-  }
 }

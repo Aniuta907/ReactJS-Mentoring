@@ -2,11 +2,21 @@ import React from "react";
 
 import "./MovieGenreSelect.scss";
 
-export const MovieGenreSelect: React.FC = () => {
+interface MovieGenreSelectProps {
+  name?: string;
+  value?: Array<string>;
+  onChange: (event) => void;
+}
+
+export const MovieGenreSelect: React.FC<MovieGenreSelectProps> = ({
+  name,
+  value,
+  onChange,
+}) => {
   return (
-    <select className="movie-genre-select">
+    <select className="movie-genre-select" onChange={onChange} name={name}>
       <option value="" style={{ display: "none" }}>
-        Select Genre
+      {value.length === 2 ? value.join(" & ") : value.join(", ")}
       </option>
       <option className="movie-genre-option" value="name">
         Crime
