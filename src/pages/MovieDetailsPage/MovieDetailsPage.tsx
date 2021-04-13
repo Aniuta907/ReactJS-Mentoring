@@ -5,7 +5,7 @@ import "./MovieDetailsPage.scss";
 import { Logo } from "../../components/Logo";
 import { MovieDetails } from "../../components/MovieDetails";
 import { SearchIconButton } from "../../components/SearchIconButton";
-import { Dropdown, FilterBar, MoviesList, ResultCount } from "../../components";
+import { Dropdown, FilterBar, MoviesList } from "../../components";
 import { useAppSelector } from "../../store/reducers";
 
 export const MovieDetailsPage: React.FC = () => {
@@ -34,7 +34,6 @@ export const MovieDetailsPage: React.FC = () => {
         <FilterBar />
         <Dropdown />
       </div>
-      <ResultCount year="39" />
       <MoviesList />
     </main>
   );

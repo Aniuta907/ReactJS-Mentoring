@@ -12,9 +12,10 @@ const App: React.FC = () => {
       <div className="App">
         <Switch>
           <Route path="/movie/:urlID" component={MovieDetailsPage}/>
+          <Route path="/search/:query" component={HomePage}/>
+          <Route path="/nomoviefound" component={NoMovieFoundPage}/>
           <Route exact path="/" component={HomePage}/>
           <Route path="*" component={ErrorPage}/>
-          <Route path="/search" component={NoMovieFoundPage}/>
         </Switch>
         <Footer />
       </div>
