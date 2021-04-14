@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Field, Form, Formik } from "formik";
-import * as Yup from "yup";
 
 import "./AddMovieModalContent.scss";
-import { addMovie, setAddMovie } from "../../store/actions/movies";
+import { addMovie } from "../../store/actions/movies";
 import { MovieGenreSelect } from "../MovieGenreSelect/MovieGenreSelect";
+import MovieModalContentSchema from "../../validationSchemas/MovieModalContentSchema";
 
 interface AddMovieModalContentProps {
   closeModal?: () => void;
@@ -14,47 +14,34 @@ interface AddMovieModalContentProps {
 export const AddMovieModalContent: React.FC<AddMovieModalContentProps> = ({closeModal}) => {
   const dispatchRedux = useDispatch();
 
+  const initialValues = {
+    title: '',
+    release_date: '',
+    poster_path: '',
+    genres: [],
+    overview: '',
+    runtime: ''
+  }
+
+  const onSubmit = (values) => {
+    const movieToAdd = {
+      ...values,
+      runtime: Number(values.runtime),
+      release_date: String(values.release_date)
+    };
+
+    dispatchRedux(addMovie(movieToAdd));
+
+    closeModal();
+  }
+
   return (
     <Formik
-      initialValues={{
-        title: '',
-        release_date: '',
-        poster_path: '',
-        genres: [],
-        overview: '',
-        runtime: ''
-      }}
+      initialValues = {initialValues}
 
-      onSubmit={(values) => {
-        const movieToAdd = {
-          ...values,
-          runtime: Number(values.runtime),
-          release_date: String(values.release_date)
-        };
-    
-        dispatchRedux(setAddMovie(movieToAdd));
-        dispatchRedux(addMovie(movieToAdd));
-    
-        closeModal();
-      }}
+      onSubmit={onSubmit}
 
-      validationSchema={Yup.object({
-        title: Yup.string()
-          .min(1, 'Please enter title more than 1 character')
-          .max(70, 'Please enter title less than 70 characters')
-          .required('Please enter title'),
-        release_date: Yup.string().required('Please enter release date'),
-        poster_path: Yup.string().url().required('Please enter poster path'),
-        genres: Yup.string().required('Please enter genre'),
-        overview: Yup.string()
-          .min(1, 'Please enter overview more than 1 character')
-          .max(700, 'Please enter overview less than 700 characters')
-          .required('Please enter overview'),
-        runtime: Yup.number()
-          .integer('Runtime should be an integer')
-          .min(1, 'Please enter runtime more than 1 minutes')
-          .required('Please enter runtime'),
-      })}
+      validationSchema={MovieModalContentSchema}
     >
       <Form>
       <label className="add-movie-label">title</label>

@@ -6,7 +6,6 @@ import {
   DELETE_MOVIE_FAILURE,
   EDIT_MOVIE_SUCCESS,
   EDIT_MOVIE_FAILURE,
-  SET_ADD_MOVIE,
   ADD_MOVIE_SUCCESS,
   ADD_MOVIE_FAILURE,
   UPDATE_MOVIE
@@ -59,11 +58,6 @@ export const moviesReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload,
-      };
-    case SET_ADD_MOVIE:
-      return {
-        ...state,
-        addMovie: action.payload,
       };
     case ADD_MOVIE_SUCCESS:
       return {

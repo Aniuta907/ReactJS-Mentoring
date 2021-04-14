@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Field, Form, Formik } from "formik";
-import * as Yup from "yup";
 
 import "./EditMovieModalContent.scss";
 import { MovieGenreSelect } from "../MovieGenreSelect";
 import { useAppSelector } from "../../store/reducers";
-import { editMovie, setEditMovie } from "../../store/actions/movies";
+import { editMovie } from "../../store/actions/movies";
+import MovieModalContentSchema from "../../validationSchemas/MovieModalContentSchema";
 
 interface EditMovieModalContentProps {
   handleEditSubmit?: () => void;
@@ -14,53 +14,27 @@ interface EditMovieModalContentProps {
 
 export const EditMovieModalContent: React.FC<EditMovieModalContentProps> = ({handleEditSubmit}) => {
   const movieToEdit = useAppSelector(state => state.moviesData.editMovie);
-  const { id, title, runtime, overview, poster_path, release_date, genres } = movieToEdit;
 
-  const dispatchRedux = useDispatch();
+  const dispatch = useDispatch();
+
+  const onSubmit = (values) => {
+    const movieEdit = {
+      ...values,
+      runtime: Number(values.runtime),
+      id: Number(values.id)
+    };
+
+    dispatch(editMovie(movieEdit));
+    handleEditSubmit();
+  }
 
   return (
     <Formik
-      initialValues={{
-        id,
-        title,
-        poster_path,
-        runtime,
-        overview,
-        release_date,
-        genres,
-      }}
+      initialValues={movieToEdit}
 
-      onSubmit={(values) => {
-        const movieEdit = {
-          ...values,
-          runtime: Number(values.runtime),
-          id: Number(values.id)
-        };
-        dispatchRedux(setEditMovie(movieEdit.id));
-        dispatchRedux(editMovie(movieEdit));
-        handleEditSubmit();
-      }}
+      onSubmit={onSubmit}
 
-      validationSchema={Yup.object({
-        id: Yup.number()
-          .integer('id should be an integer')
-          .required('Please enter id'),
-        title: Yup.string()
-          .min(1, 'Please enter title more than 1 character')
-          .max(70, 'Please enter title less than 70 characters')
-          .required('Please enter title'),
-        release_date: Yup.date().required('Please enter release date'),
-        poster_path: Yup.string().url().required('Please enter poster path'),
-        genres: Yup.array().required('Please enter genre'),
-        overview: Yup.string()
-          .min(1, 'Please enter overview more than 1 character')
-          .max(700, 'Please enter overview less than 700 characters')
-          .required('Please enter overview'),
-        runtime: Yup.number()
-          .integer('Runtime should be an integer')
-          .min(1, 'Please enter runtime more than 1 minutes')
-          .required('Please enter runtime'),
-      })}
+      validationSchema={MovieModalContentSchema}
     >
     <Form>
       <label className="edit-movie-label">movie id</label>
