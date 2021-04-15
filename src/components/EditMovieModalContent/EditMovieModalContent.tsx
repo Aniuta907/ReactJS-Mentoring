@@ -1,126 +1,92 @@
-import React, { useReducer } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Field, Form, Formik } from "formik";
 
 import "./EditMovieModalContent.scss";
 import { MovieGenreSelect } from "../MovieGenreSelect";
-import { UPDATE_MOVIE } from "../../store/actionTypes/movies";
-import { RootState } from "../../store/reducers";
-import { editMovie, setEditMovie } from "../../store/actions/movies";
+import { useAppSelector } from "../../store/reducers";
+import { editMovie } from "../../store/actions/movies";
+import MovieModalContentSchema from "../../validationSchemas/MovieModalContentSchema";
 
 interface EditMovieModalContentProps {
   handleEditSubmit?: () => void;
 }
 
 export const EditMovieModalContent: React.FC<EditMovieModalContentProps> = ({handleEditSubmit}) => {
-  const movieToEdit = useSelector((state: RootState) => state.moviesData.editMovie);
-  const { id, title, runtime, overview, poster_path, release_date, genres } = movieToEdit;
+  const movieToEdit = useAppSelector(state => state.moviesData.editMovie);
 
-  const initialState = {
-    id,
-    title,
-    poster_path,
-    runtime,
-    overview,
-    release_date,
-    genres,
-  };
+  const dispatch = useDispatch();
 
-  const reducer = (state, action) => {
-    const { field, value } = action.payload;
-    let elementToUpdate = state[field];
-    switch (action.type) {
-      case UPDATE_MOVIE:
-        elementToUpdate = value;
-        return {
-          ...state,
-          [field]: elementToUpdate,
-        };
-
-      default:
-        break;
-    }
-  };
-
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const dispatchRedux = useDispatch();
-
-  const handleChange = (event) => {
-    event.preventDefault();
-    dispatch({
-      type: UPDATE_MOVIE,
-      payload: {
-        field: event.target.name,
-        value: event.target.value,
-      },
-    });
-  };
-
-  const handleEditSubmitForm = () => {
+  const onSubmit = (values) => {
     const movieEdit = {
-      ...state,
-      runtime: Number(state.runtime),
+      ...values,
+      runtime: Number(values.runtime),
+      id: Number(values.id)
     };
-    dispatchRedux(setEditMovie(movieEdit));
-    dispatchRedux(editMovie(movieEdit));
+
+    dispatch(editMovie(movieEdit));
     handleEditSubmit();
-  };
+  }
 
   return (
-  <>  
-    <>
+    <Formik
+      initialValues={movieToEdit}
+
+      onSubmit={onSubmit}
+
+      validationSchema={MovieModalContentSchema}
+    >
+    <Form>
       <label className="edit-movie-label">movie id</label>
-      <input className="edit-movie-input" name="id" onChange={handleChange} value={state.id}/>
+      <Field className="edit-movie-input" name="id" type="text"/>
 
       <label className="edit-movie-label">title</label>
-      <input
-        onChange={handleChange}
-        value={state.title}
+      <Field
         name="title"
+        type="text"
         className="edit-movie-input"
         placeholder="Title here"
       />
 
       <label className="edit-movie-label">release date</label>
-      <input value={state.release_date} name="release_date" type="date" onChange={handleChange} className="edit-movie-input" />
+      <Field name="release_date" type="date" className="edit-movie-input" />
 
       <label className="edit-movie-label">movie url</label>
-      <input
-        value={state.poster_path}
+      <Field
         name="poster_path"
+        type="url"
         className="edit-movie-input"
-        onChange={handleChange}
         placeholder="Movie URL here"
       />
 
       <label className="edit-movie-label">genre</label>
 
-      <MovieGenreSelect onChange={handleChange} value={state.genres}/>
+      <Field className="add-movie-select" name="genres" as={MovieGenreSelect}/>
 
       <label className="edit-movie-label">overview</label>
-      <input
+      <Field
         className="edit-movie-input"
-        onChange={handleChange}
+        type="text"
         placeholder="Overview here"
-        value={state.overview}
         name="overview"
       />
 
       <label className="edit-movie-label">runtime</label>
-      <input
+      <Field
         className="edit-movie-input"
-        onChange={handleChange}
         placeholder="Runtime here"
-        value={state.runtime}
         name="runtime"
+        type="text"
       />  
-    </>
     
-    <div className="edit-movie-footer">
-      <button className="edit-movie-left-button">RESET</button>
-      <button className="edit-movie-right-button" onClick={handleEditSubmitForm}>
-        CONFIRM
-       </button>
-    </div>
-  </>
+      <div className="edit-movie-footer">
+        <button className="edit-movie-left-button" type="reset">RESET</button>
+        <button className="edit-movie-right-button" type="submit">
+          CONFIRM
+        </button>
+      </div>
+
+    </Form>
+  </Formik>
   );
 };

@@ -2,14 +2,10 @@ import {
   FETCH_MOVIES_SUCCESS,
   SET_EDIT_MOVIE,
   SET_DELETE_MOVIE,
-  DELETE_MOVIE,
   DELETE_MOVIE_SUCCESS,
   DELETE_MOVIE_FAILURE,
   EDIT_MOVIE_SUCCESS,
-  EDIT_MOVIE,
   EDIT_MOVIE_FAILURE,
-  SET_ADD_MOVIE,
-  ADD_MOVIE,
   ADD_MOVIE_SUCCESS,
   ADD_MOVIE_FAILURE,
   UPDATE_MOVIE
@@ -34,7 +30,7 @@ export const moviesReducer = (state = initialState, action) => {
     case SET_EDIT_MOVIE:
       return {
         ...state,
-        editMovie: action.payload,
+        editMovie: state.movies.find((movie) => movie.id === action.payload),
       };
     case EDIT_MOVIE_SUCCESS:
       newMovies = [...state.movies];
@@ -42,10 +38,6 @@ export const moviesReducer = (state = initialState, action) => {
       return {
         ...state,
         movies: newMovies,
-      };
-    case EDIT_MOVIE:
-      return {
-        ...state,
       };
     case EDIT_MOVIE_FAILURE:
       return {
@@ -55,30 +47,17 @@ export const moviesReducer = (state = initialState, action) => {
     case SET_DELETE_MOVIE:
       return {
         ...state,
-        deleteMovie: action.payload,
+        deleteMovie: state.movies.find((movie) => movie.id === action.payload),
       };
     case DELETE_MOVIE_SUCCESS:
       return {
         ...state,
         movies: state.movies.filter((movie) => movie.id !== action.payload),
       };
-    case DELETE_MOVIE:
-      return {
-        ...state,
-      };
     case DELETE_MOVIE_FAILURE:
       return {
         ...state,
         error: action.payload,
-      };
-    case SET_ADD_MOVIE:
-      return {
-        ...state,
-        addMovie: action.payload,
-      };
-    case ADD_MOVIE:
-      return {
-        ...state,
       };
     case ADD_MOVIE_SUCCESS:
       return {
