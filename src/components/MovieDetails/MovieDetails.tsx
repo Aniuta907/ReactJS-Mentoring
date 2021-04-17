@@ -1,12 +1,14 @@
 import React from "react";
 
 import "./MovieDetails.scss";
+import { MovieCardInterface } from "../../interfaces/MovieCardInterface";
+
 
 interface MovieDetailsProps {
-  movie: any;
+  movie: MovieCardInterface;
 }
 
-export const MovieDetails: React.FC<MovieDetailsProps> = ({movie}) => (
+export const MovieDetails: React.FC<MovieDetailsProps> = ({ movie }) => (
   <>
     <div className="movie-details">
       <img src={movie.poster_path} className="movie-details-image" />

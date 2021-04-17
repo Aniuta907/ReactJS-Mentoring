@@ -1,4 +1,4 @@
 export { HomePage } from "./HomePage";
 export { MovieDetailsPage } from "./MovieDetailsPage";
-export { ErrorPage } from "./ErrorPage";
+export { Page404 } from "./Page404";
 export { NoMovieFoundPage } from "./NoMovieFoundPage";

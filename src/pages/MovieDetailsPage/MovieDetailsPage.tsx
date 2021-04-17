@@ -9,16 +9,27 @@ import { Dropdown, FilterBar, MoviesList } from "../../components";
 import { useAppSelector } from "../../store/reducers";
 
 export const MovieDetailsPage: React.FC = () => {
-  const [currentMovie, setCurrentMovie] = useState(0);
-  const { urlID } = useParams<{ urlID: string }>();
-  
+  const { id } = useParams<{ id: string }>();
   let { movies } = useAppSelector(state => state.moviesData);
+  const [currentMovie, setCurrentMovie] = useState({
+    id: '',
+    title: '',
+    release_date: '',
+    poster_path: '',
+    genres: [],
+    overview: '',
+    runtime: '',
+    vote_average: ''
+  });
   
   useEffect(() => {
     window.scrollTo(0, 0);
-    const current = movies.find(({ id }) => id === +urlID);
+    const current = movies.find((movie) => {
+      const { id: moviesID } = movie;
+      return moviesID === +id;
+    });
     setCurrentMovie(current);
-  }, [urlID, movies]);
+  }, [id, movies]);
 
   return (
     <main>

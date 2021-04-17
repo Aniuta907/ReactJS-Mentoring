@@ -15,11 +15,11 @@ import {
 import { FETCH_MOVIES_API_URL } from "../../consts";
 import { AppDispatch } from "..";
 
-export const fetchMovies = () => {
+export const fetchMovies = (searchText?: string) => {
   return async (dispatch: AppDispatch) => {
     dispatch({ type: FETCH_MOVIES });
     try {
-      const response = await fetch(FETCH_MOVIES_API_URL);
+      const response = await fetch(FETCH_MOVIES_API_URL + (searchText ? `?search=${searchText}&searchBy=title` : ''));
       const data = await response.json();
       dispatch({
         type: FETCH_MOVIES_SUCCESS,

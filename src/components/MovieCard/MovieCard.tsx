@@ -3,28 +3,21 @@ import { Link } from 'react-router-dom';
 
 import { DottedIcon } from "../DottedIcon";
 import "./MovieCard.scss";
+import { MovieCardInterface } from "../../interfaces/MovieCardInterface";
+
 interface MovieCardProps {
-  releaseDate: string;
-  title: string;
-  genres: Array<string>;
-  posterPath: string;
-  id: string;
+  movie: MovieCardInterface;
 }
 
-export const MovieCard: React.FC<MovieCardProps> = ({
-  releaseDate,
-  title,
-  genres,
-  posterPath,
-  id,
-}) => {
+export const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
+  const { release_date, title, genres, poster_path, id } = movie;
   return (
     <div className="movie">
       <div className="movie-dropdown">
         <DottedIcon id={id} />
       </div>
-      <Link to={`/movie/${id}`}>
-        <img className="movie-image" src={posterPath} />
+      <Link to={`/movies/${id}`}>
+        <img className="movie-image" src={poster_path} />
       </Link>
       <div className="movie-footer">
         <div className="movie-wrapper">
@@ -34,7 +27,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({
           </span>
         </div>
         <div className="movie-wrapper-year">
-          <span className="movie-year movie-text">{releaseDate.split("-")[0]}</span>
+          <span className="movie-year movie-text">{release_date.split("-")[0]}</span>
         </div>
       </div>
     </div>
