@@ -1,0 +1,88 @@
+.error-page {
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &-button {
+    background: #232323;
+    color: #f65161;
+    font-size: large;
+    z-index: 1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 220px;
+    height: 53px;
+    margin-left: 10px;
+    border-color: #f65161;
+    border-radius: 3px;
+  }
+
+  &-h2 {
+    text-transform: capitalize;
+    color: #cacaca;
+    font-family: "Open Sans", sans-serif;
+    font-size: 42px;
+    font-weight: 100;
+    letter-spacing: 2px;
+  }
+
+  &-h1 {
+    color: #cacaca;
+    font-family: "Open Sans", sans-serif;
+    font-size: 62px;
+    letter-spacing: 2px;
+  }
+
+  &-glitch {
+    color:#fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 200px;
+    letter-spacing: 10px;
+    position: relative;
+    padding: 30px;
+    &:before, &:after {
+       content:'404';
+       color:#fff;
+       position: absolute;
+       top:0;
+       overflow:hidden;
+       padding:30px;
+    }
+    &:before {
+       left:3px;
+       text-shadow: -3px 0 red;
+       animation: glitch-before 2s linear 0s infinite alternate;
+    }
+    &:after {
+       left:-3px;
+       text-shadow: -3px 0 blue;
+       animation: glitch-after 2s linear 0s infinite alternate;
+    }
+  }
+  
+  @keyframes glitch-before {
+    $steps: 20;
+    @for $i from 0 through $steps {
+       #{percentage($i*(1/$steps))} {
+          clip: rect(random(150)+px, 350px, random(150)+px, 30px)
+       }
+    }
+  }
+  
+  @keyframes glitch-after {
+    $steps: 20;
+    @for $i from 0 through $steps {
+       #{percentage($i*(1/$steps))} {
+          clip: rect(random(150)+px, 350px, random(150)+px, 30px)
+       }
+    }
+  }
+}
+
+.logo-div {
+  margin-top: 20px;
+  margin-left: 100px;
+}

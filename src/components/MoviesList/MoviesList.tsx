@@ -1,40 +1,31 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Redirect } from "react-router";
 
 import "./MoviesList.scss";
 import { MovieCard } from "../MovieCard";
 import { useAppSelector } from "../../store/reducers";
 import { fetchMovies } from "../../store/actions/movies";
+import { ResultCount } from "..";
 
-interface MoviesListProps {
-  getCurrentMovie?: (movieID, movies) => void;
-}
-
-export const MoviesList: React.FC<MoviesListProps> = ({getCurrentMovie}) => {
+export const MoviesList: React.FC = () => {
   const dispatch = useDispatch();
-  const { movies } = useAppSelector(state => state.moviesData);
-
-  // const onMovieClick = useCallback(() => {
-  //   console.log("movie");
-  // }, []);
-
+  let { movies } = useAppSelector(state => state.moviesData);
+  
   useEffect(() => {
     dispatch(fetchMovies());
   }, [dispatch]);
 
   return (
-    <div className="list-wrapper">
-      {movies.map((movie: any) => (
-        <MovieCard
-          title={movie.title}
-          genres={movie.genres}
-          releaseDate={movie.release_date}
-          posterPath={movie.poster_path}
-          key={movie.id}
-          id={movie.id}
-          onClick={()=>getCurrentMovie(movie.id, movies)}
-        />
-      ))}
-    </div>
+    movies.length ? //не уверена насчет этого условия
+    <>
+      <ResultCount count={movies.length} />
+      <div className="list-wrapper">
+        {movies.map((movie: any) => (
+          <MovieCard movie={movie} key={movie.id} />
+        ))}
+      </div>
+    </>
+    : <Redirect to='/nomoviefound'/>
   );
 };

@@ -1,0 +1,28 @@
+.wrapper-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.no-movie-found {
+  height: calc(100vh - 70px);
+
+  &-wrapper {
+    height: calc(100vh - 460px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-h1 {
+    text-transform: capitalize;
+    color: #cacaca;
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 100;
+    font-size: 42px;
+    letter-spacing: 2px;
+  }
+}

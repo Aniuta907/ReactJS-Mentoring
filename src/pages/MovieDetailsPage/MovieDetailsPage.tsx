@@ -1,18 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 
 import "./MovieDetailsPage.scss";
 import { Logo } from "../../components/Logo";
 import { MovieDetails } from "../../components/MovieDetails";
 import { SearchIconButton } from "../../components/SearchIconButton";
-import { Dropdown, FilterBar, MoviesList, ResultCount } from "../../components";
+import { Dropdown, FilterBar, MoviesList } from "../../components";
+import { useAppSelector } from "../../store/reducers";
 
 export const MovieDetailsPage: React.FC = () => {
-  const [currentMovie, setCurrentMovie] = useState(181808);
+  const { id } = useParams<{ id: string }>();
+  let { movies } = useAppSelector(state => state.moviesData);
+  const [currentMovie, setCurrentMovie] = useState({
+    id: '',
+    title: '',
+    release_date: '',
+    poster_path: '',
+    genres: [],
+    overview: '',
+    runtime: '',
+    vote_average: ''
+  });
   
-  const getCurrentMovie = (movieID, movies) => {
-    const current = movies.find(({ id }) => id === movieID);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const current = movies.find((movie) => {
+      const { id: moviesID } = movie;
+      return moviesID === +id;
+    });
     setCurrentMovie(current);
-  };
+  }, [id, movies]);
 
   return (
     <main>
@@ -28,8 +45,7 @@ export const MovieDetailsPage: React.FC = () => {
         <FilterBar />
         <Dropdown />
       </div>
-      <ResultCount year="39" />
-      <MoviesList getCurrentMovie={getCurrentMovie}/>
+      <MoviesList />
     </main>
   );
 };
