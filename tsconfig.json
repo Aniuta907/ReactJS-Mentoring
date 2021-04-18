@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "plugins": [
+            {
+              "transform": "ts-auto-mock/transformer",
+              "cacheBetweenTests": false
+            }
+        ],
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react",
+        "esModuleInterop": true
+    }
+}

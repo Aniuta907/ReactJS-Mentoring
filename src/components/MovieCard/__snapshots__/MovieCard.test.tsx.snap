@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieCard should render correctly 1`] = `
+<div
+  className="movie"
+>
+  <div
+    className="movie-dropdown"
+  >
+    <DottedIcon
+      id=""
+    />
+  </div>
+  <Link
+    to="/movies/"
+  >
+    <img
+      className="movie-image"
+      src=""
+    />
+  </Link>
+  <div
+    className="movie-footer"
+  >
+    <div
+      className="movie-wrapper"
+    >
+      <span
+        className="movie-title movie-text"
+      />
+      <span
+        className="movie-genre movie-text"
+      />
+    </div>
+    <div
+      className="movie-wrapper-year"
+    >
+      <span
+        className="movie-year movie-text"
+      />
+    </div>
+  </div>
+</div>
+`;
