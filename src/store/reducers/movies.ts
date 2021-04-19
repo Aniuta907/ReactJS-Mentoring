@@ -7,11 +7,10 @@ import {
   EDIT_MOVIE_SUCCESS,
   EDIT_MOVIE_FAILURE,
   ADD_MOVIE_SUCCESS,
-  ADD_MOVIE_FAILURE,
-  UPDATE_MOVIE
+  ADD_MOVIE_FAILURE
 } from '../actionTypes/movies';
 
-const initialState = {
+export const initialState = {
   movies: [],
   editMovie: null,
   deleteMovie: null,
@@ -69,14 +68,6 @@ export const moviesReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
       };
-    case UPDATE_MOVIE:
-        let { field, value } = action.payload;
-        let movieToUpdate = state[field];
-        movieToUpdate = value;
-        return {
-          ...state,
-          [field]: movieToUpdate,
-        };
     default:
       return state;
   }
