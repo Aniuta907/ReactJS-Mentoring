@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddMovieModalManager should render correctly 1`] = `
+<Fragment>
+  <button
+    className="add-movie-button"
+    onClick={[Function]}
+  >
+    + add movie
+  </button>
+</Fragment>
+`;
